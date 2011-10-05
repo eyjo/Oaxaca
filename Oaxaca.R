@@ -20,7 +20,9 @@ oaxaca.default <- function(m1, m2, FE = FALSE) {
     VB2 <- vcov(m2)
     # Check for model mismatch
     allvars <- union(rownames(B1), rownames(B2))
-    if (rownames(B1) != allvars || rownames(B2) != allvars) {
+    if (length(rownames(B1)) != length(allvars) ||
+	length(rownames(B2)) != length(allvars) ||
+	any(rownames(B1) != allvars) || any(rownames(B2) != allvars)) {
         warning("Model mismatch!")
         X1 <- expandMatrix(X1, allvars)
         X2 <- expandMatrix(X2, allvars)
